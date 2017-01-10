@@ -1,71 +1,102 @@
 #include <string.h>
+#include <ctype.h>
 #include <jansson.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include "../../src/ulfius.h"
-/*
 
-http://192.168.1.197:7447/flwd
-POST
-body:
-{
-  "flwd": "Cats"
-}
-headers:
-Content-Type  application/json
-
-*/
-
-#define PORT 7447
+#define PORT 4437
 #define PREFIX "/flwd"
 
-// Callback function used to set a new four letter word
-int callback_flwd (const struct _u_request * request, struct _u_response * response, void * user_data);
-
 /**
- * Main function
+ * callback functions declaration
  */
+int callback_flwd (const struct _u_request * request, struct _u_response * response, void * user_data);
+int callback_default (const struct _u_request * request, struct _u_response * response, void * user_data);
+
+const char * get_flwd_value(const struct _u_map * map) {
+    return u_map_get(map, "flwd");
+}
+
+void all_upper(char * value) {
+
+  // Convert to upper case
+  char *s = value;
+  int i = 0;
+  while (*s) {
+    *s = toupper((unsigned char) *s);
+    if (i == 4) {
+      *s =0;
+      return;
+      }
+    s++;i++;
+  }
+}
+
 int main (int argc, char **argv) {
- 
-  char buffer[30]; 
+  int ret;
   
-  // Initialize the instance
+  // Set the framework port number
   struct _u_instance instance;
+  
+  y_init_logs("simple_example", Y_LOG_MODE_CONSOLE, Y_LOG_LEVEL_DEBUG, NULL, "Starting simple_example");
   
   if (ulfius_init_instance(&instance, PORT, NULL) != U_OK) {
     y_log_message(Y_LOG_LEVEL_ERROR, "Error ulfius_init_instance, abort");
     return(1);
   }
   
-  // Max post param size is 16 Kb, which means an uploaded file is no more than 16 Kb
-  instance.max_post_param_size = 16*1024;
+  u_map_put(instance.default_headers, "Access-Control-Allow-Origin", "*");
+  
+  // Maximum body size sent by the client is 1 Kb
+  instance.max_post_body_size = 1024;
   
   // Endpoint declaration
-  ulfius_add_endpoint_by_val(&instance, "POST", PREFIX, NULL, NULL, NULL, NULL, &callback_flwd, &buffer);
-  
+  ulfius_add_endpoint_by_val(&instance, "POST", PREFIX, "/:flwd", NULL, NULL, NULL, &callback_flwd, "user data 2");
+  ulfius_set_default_endpoint(&instance, NULL, NULL, NULL, &callback_default, NULL);
+
   // Start the framework
-  if (ulfius_start_framework(&instance) == U_OK) {
-    printf("Start flwd service on port %d\n", instance.port);
+  // Open an http connection
+  ret = ulfius_start_framework(&instance);
+  
+  if (ret == U_OK) {
+    y_log_message(Y_LOG_LEVEL_DEBUG, "Start %sframework on port %d", ((argc == 4 && strcmp("-secure", argv[1]) == 0)?"secure ":""), instance.port);
     
     // Wait for the user to press <enter> on the console to quit the application
     getchar();
   } else {
-    printf("Error starting framework\n");
+    y_log_message(Y_LOG_LEVEL_DEBUG, "Error starting framework");
   }
-
-  printf("End framework\n");
+  y_log_message(Y_LOG_LEVEL_DEBUG, "End framework");
+  
+  y_close_logs();
+  
   ulfius_stop_framework(&instance);
   ulfius_clean_instance(&instance);
   
   return 0;
 }
 
-int callback_flwd (const struct _u_request * request, struct _u_response * response, void * user_data) {
 
-char * json_params = json_dumps(request->json_body, JSON_INDENT(2));
-printf("%s\n", json_params);
-free(json_params);
+/**
+ */
+int callback_flwd(const struct _u_request * request, struct _u_response * response, void * user_data) {
+// ZZ
 
-  response->status = 200;
+  char word[30];
+  sprintf(word, "%s\n",get_flwd_value(request->map_url));
+  all_upper(word);
+  printf("Set this word on the FLWD: %s\n", word);
   return U_OK;
 }
 
+/**
+ * Default callback function called if no endpoint has a match
+ */
+int callback_default (const struct _u_request * request, struct _u_response * response, void * user_data) {
+  response->string_body = strdup("Page not found - sorry.");
+  response->status = 404;
+  return U_OK;
+}
