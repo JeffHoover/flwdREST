@@ -3,4 +3,4 @@ flwdREST
 *.o
 call_ext_py
 call_py
-
+func.pyc

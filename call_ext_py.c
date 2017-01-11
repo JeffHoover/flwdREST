@@ -20,16 +20,22 @@ int main(int argc, char *argv[])
 
     // Build the name object
     pName = PyString_FromString(argv[1]);
+printf("0 = %s \n", argv[0]);
+printf("1 = %s \n", argv[1]);
+printf("2 = %s \n", argv[2]);
 
     // Load the module object
     pModule = PyImport_Import(pName);
 
+printf("5\n");
     // pDict is a borrowed reference 
     pDict = PyModule_GetDict(pModule);
 
+printf("6\n");
     // pFunc is also a borrowed reference 
     pFunc = PyDict_GetItemString(pDict, argv[2]);
 
+printf("7\n");
     if (PyCallable_Check(pFunc)) 
     {
         PyObject_CallObject(pFunc, NULL);
@@ -38,6 +44,7 @@ int main(int argc, char *argv[])
         PyErr_Print();
     }
 
+printf("8\n");
     // Clean up
     Py_DECREF(pModule);
     Py_DECREF(pName);
