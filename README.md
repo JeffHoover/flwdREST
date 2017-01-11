@@ -13,5 +13,10 @@ output will be:
    hello
 
 g++ $(python-config --includes --libs) call_ext_py.c -lpython2.7 -o call_ext_py
+./call_ext_py func.py printme
+
+
+
+~/ulfius/examples/flwdREST
 
 
