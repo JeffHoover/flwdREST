@@ -41,7 +41,7 @@ int main (int argc, char **argv) {
   // Set the framework port number
   struct _u_instance instance;
   
-  y_init_logs("simple_example", Y_LOG_MODE_CONSOLE, Y_LOG_LEVEL_DEBUG, NULL, "Starting simple_example");
+  y_init_logs("flwdREST", Y_LOG_MODE_CONSOLE, Y_LOG_LEVEL_DEBUG, NULL, "Starting flwdREST");
   
   if (ulfius_init_instance(&instance, PORT, NULL) != U_OK) {
     y_log_message(Y_LOG_LEVEL_ERROR, "Error ulfius_init_instance, abort");
