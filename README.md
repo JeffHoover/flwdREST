@@ -1,7 +1,7 @@
 Web Framework for REST API in C  
 https://github.com/babelouest/ulfius  
   
-built and installed at:
+built and installed at:  
 ~/ulfius/  
 
 clone this repo (flwdREST) into:  
