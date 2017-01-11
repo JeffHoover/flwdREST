@@ -19,8 +19,8 @@ When you do, the console on the server will say:
 Press <enter> to end the service  
 2017-01-11T01:08:58 - flwdREST DEBUG: End framework  
   
-# C program that calls python from .py file,  
-# based on this sample:  
+# C program that calls python from .py file  
+## based on this sample:  
 https://docs.python.org/2/extending/embedding.html  
 
 ## to build:  
