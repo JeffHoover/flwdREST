@@ -19,7 +19,8 @@ When you do, the console on the server will say:
 Press <enter> to end the service  
 2017-01-11T01:08:58 - flwdREST DEBUG: End framework  
   
-# C program that calls python from .py file, based on this sample:  
+# C program that calls python from .py file  
+## based on this sample:  
 https://docs.python.org/2/extending/embedding.html  
 
 ## to build:  
@@ -28,3 +29,4 @@ g++ $(python2.7-config --includes --libs) call_py2.c -o call_py2 -lpython2.7
 ## to run  
 ./call_py2 word flwd Woof  
 
+"Should display Woof on hardware."  
