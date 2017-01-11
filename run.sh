@@ -1,2 +1,2 @@
-./call_py2 multiply multiply 4 6
+./call_py2 word flwd Woof
 
