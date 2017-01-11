@@ -33,5 +33,7 @@ g++ $(python-config --includes --libs) call_ext_py.c -lpython2.7 -o call_ext_py
 CURRENTLY segfault'ing :(  
   
 
+https://docs.python.org/2/extending/embedding.html  
+http://www.linuxjournal.com/article/8497  
 
 
