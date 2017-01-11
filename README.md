@@ -1,6 +1,11 @@
-https://github.com/JeffHoover/flwdREST  
-~/ulfius/examples/flwdREST  
-need ulfius built and installed for REST server  
+Web Framework for REST API in C  
+https://github.com/babelouest/ulfius  
+  
+built and installed at:
+~/ulfius/  
+
+clone this repo (flwdREST) into:  
+~/ulfius/examples/flwdREST/  
   
 --------------  
 REST Server:  
