@@ -26,6 +26,8 @@ https://docs.python.org/2/extending/embedding.html
 ## to build:  
 g++ $(python2.7-config --includes --libs) call_py2.c -o call_py2 -lpython2.7  
 
+export PYTHONPATH=.
+
 ## to run  
 ./call_py2 word flwd Woof  
 
