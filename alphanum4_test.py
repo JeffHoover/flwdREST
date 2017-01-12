@@ -13,7 +13,7 @@ def test():
     display.begin()
 
     # Scroll a message across the display
-    message = 'CODE-MASH ***'
+    message = 'FLWD CATS READ FAST FISH <-->'
     pos = 0
     print 'Press Ctrl-C to quit.'
     while True:
