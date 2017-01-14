@@ -1,3 +1,2 @@
-export PYTHONPATH=.
-./call_py2 word flwd Woof
+export PYTHONPATH=. && ./call_py2 word flwd Woof
 
