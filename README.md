@@ -10,7 +10,7 @@ OR
    make  
 
 ## determine ip address of pi  
-   fconfig | grep "inet addr:192"  
+   ifconfig | grep "inet addr:192"  
 
 ## run the REST server, noting the port number  
    ./flwdREST  
