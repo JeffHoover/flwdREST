@@ -83,12 +83,15 @@ int main (int argc, char **argv) {
 /**
  */
 int callback_flwd(const struct _u_request * request, struct _u_response * response, void * user_data) {
-// ZZ
 
-  char word[30];
-  sprintf(word, "%s\n",get_flwd_value(request->map_url));
-  all_upper(word);
-  printf("Set this word on the FLWD: %s\n", word);
+  char command[50];
+  sprintf(command,"./call_py2 alphanum4_test flwd %s", "%s\n",get_flwd_value(request->map_url));
+
+  // DO NOT CALL system()
+  // If program is run with elevated privilege, cacker could replace call_py2 with whatever they want
+  // https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=2130132
+  system(command);
+
   return U_OK;
 }
 
