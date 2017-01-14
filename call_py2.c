@@ -19,6 +19,13 @@ main(int argc, char *argv[])
     pName = PyString_FromString(argv[1]);
     /* Error checking of pName left out */
 
+    char * pname = PyString_AsString(pName);
+    char * extension = strcasestr(pname, ".py");
+    if (extension != NULL) {
+        fprintf(stderr, "Do not include a .py extension on the argument\n");
+        return 1;
+        }
+
     pModule = PyImport_Import(pName);
     Py_DECREF(pName);
 
