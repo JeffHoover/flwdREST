@@ -23,7 +23,5 @@ Server should output:
 ## End server with <enter> in server window  
 
 ## Test the hardware:  
-   export PYTHONPATH=. && ./call_py2 alphanum4_test test
-^C to exit
-
+   export PYTHONPATH=. && ./call_py2 alphanum4_test test MOOM
 
