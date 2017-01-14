@@ -1,7 +1,7 @@
 from Adafruit_LED_Backpack import AlphaNum4
 
 def clear():
-    test("")
+    flwd("")
 
 def flwd(message):
     # Create display instance on default I2C address (0x70) and bus number.
