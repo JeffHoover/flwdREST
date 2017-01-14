@@ -75,6 +75,9 @@ int main (int argc, char **argv) {
   
   ulfius_stop_framework(&instance);
   ulfius_clean_instance(&instance);
+
+  // DO NOT CALL system()
+  system("./call_py2 alphanum4_test clear");
   
   return 0;
 }
