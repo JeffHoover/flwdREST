@@ -14,9 +14,9 @@ def test(message):
     display.clear()
 
     # Print first 4 characters of string to the display buffer.
-    display.print_str(message[0:4])
+    display.print_str(message[0:4].upper())
 
-    # Write the display buffer to the hardware.  This must be called to
-    # update the actual display LEDs.
+    # Write the display buffer to the hardware.
+    # This must be called to update the actual display LEDs.
     display.write_display()
 
