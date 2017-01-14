@@ -21,11 +21,6 @@ In a REST client, post to the ip address and port number, this route:
 For example:  
    http://192.168.1.197:4437/flwd/KitTTy  
 
-## End server with <enter> in server window  
-
-## Clear the hardware:  
-   export PYTHONPATH=. && ./call_py2 alphanum4_test clear  
-OR  
-   ./clear.sh  
-
+## End server   
+'enter' in server window  
 
