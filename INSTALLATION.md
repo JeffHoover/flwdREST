@@ -24,7 +24,13 @@ Server should output:
 
 ## Test the hardware:  
    export PYTHONPATH=. && ./call_py2 alphanum4_test flwd MOOM  
+OR  
+   ./run.sh  
 
 ## Clear the hardware:  
    export PYTHONPATH=. && ./call_py2 alphanum4_test clear  
+OR  
+   ./clear.sh  
+
+
 

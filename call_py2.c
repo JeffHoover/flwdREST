@@ -3,8 +3,14 @@
 // https://docs.python.org/2/extending/embedding.html
 //
 
-int
-main(int argc, char *argv[])
+int call(int argc, char *argv[]);
+
+int main(int argc, char *argv[])
+{
+    return call(argc, argv);
+}
+
+int call(int argc, char *argv[])
 {
     PyObject *pName, *pModule, *pDict, *pFunc;
     PyObject *pArgs, *pValue;
