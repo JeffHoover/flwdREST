@@ -19,7 +19,6 @@ int callback_default (const struct _u_request * request, struct _u_response * re
 const char * get_flwd_value(const struct _u_map * map) {
     return u_map_get(map, "flwd");
 }
-
 void all_upper(char * value) {
 
   // Convert to upper case
@@ -88,12 +87,19 @@ int main (int argc, char **argv) {
 int callback_flwd(const struct _u_request * request, struct _u_response * response, void * user_data) {
 
   char command[50];
-  sprintf(command, "./call_py2 alphanum4_test flwd %s", get_flwd_value(request->map_url));
+  char word [50];
+  sprintf(word, "%s", get_flwd_value(request->map_url));
+  all_upper(word);
+  sprintf(command, "./call_py2 alphanum4_test flwd %s", word);
+//printf("%s\n", word);
+//printf(command);
+//printf("\n");
 
   // DO NOT CALL system()
   // If program is run with elevated privilege, cacker could replace call_py2 with whatever they want
   // https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=2130132
   system(command);
+  response->status = 200;
 
   return U_OK;
 }
